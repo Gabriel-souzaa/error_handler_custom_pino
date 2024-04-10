@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { ErrorHandlerException } from './errors/exception.error';
+import { ErrorGenericException } from './errors/exception';
 
 @Controller()
 export class AppController {
@@ -8,7 +8,7 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    throw new ErrorHandlerException('NOT_FOUND');
+    throw new ErrorGenericException('NOT_FOUND');
 
     return this.appService.getHello();
   }

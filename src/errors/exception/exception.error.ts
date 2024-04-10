@@ -1,4 +1,4 @@
-import { httpError } from '../constants/httpError';
+import { httpError } from '../../constants/httpError';
 
 export class ErrorHandlerException extends Error {
   private status: number;
@@ -6,25 +6,25 @@ export class ErrorHandlerException extends Error {
   private id: string;
   private prefix: string;
 
-  constructor(message: string) {
+  constructor(message: string, prefix: string) {
     super(message);
 
     this.messageTreated =
       httpError[message].message || 'Erro interno no servidor.';
     this.status = httpError[message].statusCode || 500;
     this.id = httpError[message].id;
-    this.prefix = httpError[message].prefix;
+    this.prefix = prefix;
   }
 
-  public getId() {
+  get _id() {
     return `${this.prefix}-${this.id}`;
   }
 
-  public getStatus() {
+  get _status() {
     return this.status;
   }
 
-  public getMessage() {
+  get _message() {
     return this.messageTreated;
   }
 }

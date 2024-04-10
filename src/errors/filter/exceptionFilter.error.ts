@@ -1,7 +1,7 @@
 import { ExceptionFilter, Catch, ArgumentsHost } from '@nestjs/common';
 import { Response } from 'express';
-import { ErrorHandlerException } from './exception.error';
 import { MyLogger } from 'src/logger/logger';
+import { ErrorHandlerException } from '../exception';
 
 @Catch(ErrorHandlerException)
 export class ErrorHandlerFilter implements ExceptionFilter {
@@ -11,9 +11,9 @@ export class ErrorHandlerFilter implements ExceptionFilter {
     const context = host.switchToHttp();
     const response = context.getResponse<Response>();
 
-    const status = exception.getStatus();
-    const id = exception.getId();
-    const message = exception.getMessage();
+    const status = exception._status;
+    const id = exception._id;
+    const message = exception._message;
 
     response.status(status).json({
       id,
