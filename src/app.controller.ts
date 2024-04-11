@@ -8,7 +8,7 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    throw new ErrorGenericException('NOT_FOUND');
+    throw new ErrorGenericException('ZOD_VALIDATION');
 
     return this.appService.getHello();
   }

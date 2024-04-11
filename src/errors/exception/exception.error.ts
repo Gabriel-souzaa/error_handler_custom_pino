@@ -1,30 +1,30 @@
 import { httpError } from '../../constants/httpError';
 
 export class ErrorHandlerException extends Error {
-  private status: number;
-  private messageTreated: string;
-  private id: string;
-  private prefix: string;
+  protected _status: number;
+  protected _messageTreated: string;
+  protected _id: string;
+  protected _prefix: string;
 
-  constructor(message: string, prefix: string) {
+  protected constructor(message: string, prefix: string) {
     super(message);
 
-    this.messageTreated =
+    this._messageTreated =
       httpError[message].message || 'Erro interno no servidor.';
-    this.status = httpError[message].statusCode || 500;
-    this.id = httpError[message].id;
-    this.prefix = prefix;
+    this._status = httpError[message].statusCode || 500;
+    this._id = httpError[message].id;
+    this._prefix = prefix;
   }
 
-  get _id() {
-    return `${this.prefix}-${this.id}`;
+  get id() {
+    return `${this._prefix}-${this._id}`;
   }
 
-  get _status() {
-    return this.status;
+  get status() {
+    return this._status;
   }
 
-  get _message() {
-    return this.messageTreated;
+  get messageTreated() {
+    return this._messageTreated;
   }
 }
