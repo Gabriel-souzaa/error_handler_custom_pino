@@ -5,9 +5,9 @@ import { ErrorHandlerException } from '../exception';
 
 @Catch(ErrorHandlerException)
 export class ErrorHandlerFilter implements ExceptionFilter {
-  catch(exception: ErrorHandlerException, host: ArgumentsHost) {
-    const logger = new MyLogger();
+  constructor(private readonly logger: MyLogger) { }
 
+  catch(exception: ErrorHandlerException, host: ArgumentsHost) {
     const context = host.switchToHttp();
     const response = context.getResponse<Response>();
 
@@ -21,6 +21,6 @@ export class ErrorHandlerFilter implements ExceptionFilter {
       statusCode: status,
     });
 
-    logger.error(`${id} - ${message}`);
+    this.logger.error(`${id} - ${message}`);
   }
 }
