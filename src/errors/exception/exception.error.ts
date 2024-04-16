@@ -5,8 +5,9 @@ export class ErrorHandlerException extends Error {
   protected _messageTreated: string;
   protected _id: string;
   protected _prefix: string;
+  private _data: unknown;
 
-  protected constructor(message: string, prefix: string) {
+  protected constructor(message: string, prefix: string, data?: unknown) {
     super(message);
 
     this._messageTreated =
@@ -14,6 +15,7 @@ export class ErrorHandlerException extends Error {
     this._status = httpError[message].statusCode || 500;
     this._id = httpError[message].id;
     this._prefix = prefix;
+    this._data = data;
   }
 
   get id() {
@@ -26,5 +28,9 @@ export class ErrorHandlerException extends Error {
 
   get messageTreated() {
     return this._messageTreated;
+  }
+
+  get data() {
+    return this._data;
   }
 }

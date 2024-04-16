@@ -26,7 +26,8 @@
     "pino": "^8.20.0",
     "pino-pretty": "^11.0.0",
     "reflect-metadata": "^0.2.1",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.3.1",

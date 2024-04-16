@@ -1,16 +1,26 @@
-import { Controller, Get, UseInterceptors } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Query,
+  UseInterceptors,
+  UsePipes,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { ErrorGenericException } from './errors/exception';
 import { PaginationInterceptor } from './interceptors/pagination.interceptor';
+import { ZodValidationPipe } from './pipes';
+import { ParamsHelloWorldSchema } from './schemas';
+import { ParamsHelloWorldDto } from './dtos';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) { }
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   @UseInterceptors(PaginationInterceptor)
-  getHello(): string[] {
-    return this.appService.getHello();
+  @UsePipes(new ZodValidationPipe<ParamsHelloWorldDto>(ParamsHelloWorldSchema))
+  getHello(@Query() params: ParamsHelloWorldDto) {
+    return this.appService.getHello(params.text);
   }
 
   @Get('/err')
