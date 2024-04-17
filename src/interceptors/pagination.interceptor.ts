@@ -13,8 +13,6 @@ export class PaginationInterceptor implements NestInterceptor {
     return next.handle().pipe(
       map((data) => ({
         data: data.data,
-        currentPage: data.currentPage,
-        pageSize: data.pageSize,
         totalPage: data.totalPage,
       })),
     );

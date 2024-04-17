@@ -11,8 +11,6 @@ export class AppService implements Service<string[]> {
     return {
       data: [text],
       totalPage: 10,
-      currentPage,
-      pageSize,
     };
   }
 }

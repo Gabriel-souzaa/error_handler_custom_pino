@@ -1,8 +1,6 @@
 export interface ResponseService<T> {
   data: T;
   totalPage: number;
-  currentPage: number;
-  pageSize: number;
 }
 
 //TODO
