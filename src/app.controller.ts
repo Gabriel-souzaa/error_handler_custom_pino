@@ -20,7 +20,7 @@ export class AppController {
   @UseInterceptors(PaginationInterceptor)
   @UsePipes(new ZodValidationPipe<ParamsHelloWorldDto>(ParamsHelloWorldSchema))
   getHello(@Query() params: ParamsHelloWorldDto) {
-    return this.appService.getHello(params.text);
+    return this.appService.execute(params.text, params.page, params.limit);
   }
 
   @Get('/err')
